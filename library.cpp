@@ -12,7 +12,7 @@ void Library::AddBook(const Book& book) {
         bookCount++;
     }
     else {
-        cerr << "Бібліотека заповнена. Неможливо додати книгу." << endl;
+        cout << "Бібліотека заповнена. Неможливо додати книгу." << endl;
         exit(EXIT_FAILURE);
     }
 }
