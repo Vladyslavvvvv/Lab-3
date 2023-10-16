@@ -1,6 +1,12 @@
 #include "book.h"
+#include <stdexcept>
 
 using namespace std;
+
+class LibraryException : public runtime_error {
+public:
+    LibraryException(const string& msg) : runtime_error(msg) {}
+};
 
 class Library {
 public:
