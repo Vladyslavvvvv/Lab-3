@@ -12,7 +12,7 @@ void Library::AddBook(const Book& book) {
         bookCount++;
     }
     else {
-        cout << "Library is full. Unable to add the book." << endl;
+        cout << "Бібліотека заповнена. Неможливо додати книгу." << endl;
         exit(1);
     }
 }
@@ -34,7 +34,7 @@ void Library::RemoveBook(const Book& book) {
     }
 
     if (!bookFound) {
-        cout << "The book was not found in the library." << endl;
+        cout << "Книга не знайдена в бібліотеці." << endl;
         exit(1);
     }
 }
@@ -42,56 +42,40 @@ void Library::RemoveBook(const Book& book) {
 void Library::SearchByCriteria(const string& criteria, const string& value) const {
     bool found = false;
     for (int i = 0; i < bookCount; i++) {
-        if ((criteria == "title" && books[i].getTitle() == value) ||
-            (criteria == "author" && books[i].getAuthor() == value) ||
-            (criteria == "publisher" && books[i].getPublisher() == value) ||
-            (criteria == "year" && to_string(books[i].getYear()) == value)) {
-            cout << "Books with the '" << criteria << "' criteria:\n";
-            cout << books[i].getTitle() << " written by " << books[i].getAuthor() << " (" << books[i].getYear() << ")\n";
+        if ((criteria == "назва" && books[i].getTitle() == value) ||
+            (criteria == "автор" && books[i].getAuthor() == value) ||
+            (criteria == "видавництво" && books[i].getPublisher() == value) ||
+            (criteria == "рік" && to_string(books[i].getYear()) == value)) {
+            cout << "Книги з критерієм '" << criteria << "':\n";
+            cout << books[i].getTitle() << " написав " << books[i].getAuthor() << " (" << books[i].getYear() << ")\n";
             found = true;
         }
     }
 
     if (!found) {
-        cout << "No book in the library matches the criteria." << endl;
+        cout << "Жодна книга в бібліотеці не відповідає критерію." << endl;
         exit(1);
     }
 }
 
 Library Library::operator+(const Book& book) {
     Library result = *this;
-    if (bookCount < maxBooks) {
-        result.books[result.bookCount] = book;
-        result.bookCount++;
+    try {
+        result.AddBook(book);
     }
-    else {
-        cout << "Library is full. Unable to add the book." << endl;
-        exit(1);
+    catch (...) {
+        cout << "Помилка при додаванні книги." << endl;
     }
     return result;
 }
 
 Library Library::operator-(const Book& book) {
     Library result = *this;
-    bool bookFound = false;
-    for (int i = 0; i < result.bookCount; i++) {
-        if (result.books[i].getTitle() == book.getTitle() &&
-            result.books[i].getAuthor() == book.getAuthor() &&
-            result.books[i].getYear() == book.getYear() &&
-            result.books[i].getPublisher() == book.getPublisher()) {
-            for (int j = i; j < result.bookCount - 1; j++) {
-                result.books[j] = result.books[j + 1];
-            }
-            result.bookCount--;
-            bookFound = true;
-            break;
-        }
+    try {
+        result.RemoveBook(book);
     }
-
-    if (!bookFound) {
-        cout << "The book was not found in the library." << endl;
-        exit(1);
+    catch (...) {
+        cout << "Помилка при видаленні книги." << endl;
     }
-
     return result;
 }

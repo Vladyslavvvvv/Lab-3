@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "book.h"
 #include "library.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -9,12 +10,12 @@ int main() {
     Library library;
 
     while (true) {
-        cout << "Menu:\n";
-        cout << "1. Add a book\n";
-        cout << "2. Remove a book\n";
-        cout << "3. Search for a book\n";
-        cout << "4. Exit\n";
-        cout << "Enter your choice: ";
+        cout << "Меню:\n";
+        cout << "1. Додати книгу\n";
+        cout << "2. Видалити книгу\n";
+        cout << "3. Пошук книги\n";
+        cout << "4. Вихід\n";
+        cout << "Введіть вибір: ";
         int choice;
         cin >> choice;
 
@@ -22,51 +23,53 @@ int main() {
             string title, author, publisher;
             int year;
 
-            cout << "Enter the book's title: ";
+            // Введення даних про книгу
+            cout << "Введіть назву книги: ";
             cin >> title;
-            cout << "Enter the author: ";
+            cout << "Введіть автора: ";
             cin >> author;
-            cout << "Enter the publication year: ";
+            cout << "Введіть рік публікації: ";
             cin >> year;
-            cout << "Enter the publisher: ";
+            cout << "Введіть видавництво: ";
             cin >> publisher;
 
             Book book(title, author, year, publisher);
 
+            // Додавання книги до бібліотеки
             library.AddBook(book);
-            cout << "The book has been added to the library." << endl;
+            cout << "Книга додана до бібліотеки.\n";
         }
         else if (choice == 2) {
             string removeTitle, removeAuthor, removePublisher;
             int removeYear;
-            cout << "Enter the title of the book to remove: ";
+            cout << "Введіть назву книги для видалення: ";
             cin >> removeTitle;
-            cout << "Enter the author of the book to remove: ";
+            cout << "Введіть автора книги для видалення: ";
             cin >> removeAuthor;
-            cout << "Enter the publication year of the book to remove: ";
+            cout << "Введіть рік видання книги для видалення: ";
             cin >> removeYear;
-            cout << "Enter the publisher of the book to remove: ";
+            cout << "Введіть видавництво книги для видалення: ";
             cin >> removePublisher;
 
             Book bookToRemove(removeTitle, removeAuthor, removeYear, removePublisher);
 
             library.RemoveBook(bookToRemove);
-            cout << "The book has been removed from the library." << endl;
+            cout << "Книга видалена з бібліотеки.\n";
         }
         else if (choice == 3) {
             string criteria, value;
-            cout << "Enter the search criteria (title/author/publisher/year): ";
+            cout << "Введіть критерій пошуку (назва/автор/видавництво/рік): ";
             cin >> criteria;
-            cout << "Enter the criteria value: ";
+            cout << "Введіть значення критерію: ";
             cin >> value;
 
             library.SearchByCriteria(criteria, value);
         }
         else if (choice == 4) {
-            break;
+            break; // Вихід із програми
         }
         else {
-            cout << "Invalid choice!" << endl;
+            cout << "Неправильний вибір!." << endl;
             exit(1);
         }
     }
