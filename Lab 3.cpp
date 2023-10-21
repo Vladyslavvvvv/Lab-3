@@ -1,18 +1,18 @@
 ﻿#include <iostream>
 #include "book.h"
 #include "library.h"
-#include <cstdlib>
 
 using namespace std;
 
 int main() {
+    setlocale(LC_ALL, "Ukrainian");
     Library library;
 
     while (true) {
         cout << "Menu:\n";
         cout << "1. Add a book\n";
-        cout << "2. Delete the book\n";
-        cout << "3. Book search\n";
+        cout << "2. Remove a book\n";
+        cout << "3. Search for a book\n";
         cout << "4. Exit\n";
         cout << "Enter your choice: ";
         int choice;
@@ -22,11 +22,11 @@ int main() {
             string title, author, publisher;
             int year;
 
-            cout << "Enter the title of the book: ";
+            cout << "Enter the book's title: ";
             cin >> title;
             cout << "Enter the author: ";
             cin >> author;
-            cout << "Enter the year of publication: ";
+            cout << "Enter the publication year: ";
             cin >> year;
             cout << "Enter the publisher: ";
             cin >> publisher;
@@ -34,28 +34,28 @@ int main() {
             Book book(title, author, year, publisher);
 
             library.AddBook(book);
-            cout << "The book has been added to the library.\n";
+            cout << "The book has been added to the library." << endl;
         }
         else if (choice == 2) {
             string removeTitle, removeAuthor, removePublisher;
             int removeYear;
-            cout << "Enter the name of the book to delete: ";
+            cout << "Enter the title of the book to remove: ";
             cin >> removeTitle;
-            cout << "Enter the author of the book to delete: ";
+            cout << "Enter the author of the book to remove: ";
             cin >> removeAuthor;
-            cout << "Enter the publication year of the book to delete: ";
+            cout << "Enter the publication year of the book to remove: ";
             cin >> removeYear;
-            cout << "Enter the publisher of the book to delete: ";
+            cout << "Enter the publisher of the book to remove: ";
             cin >> removePublisher;
 
             Book bookToRemove(removeTitle, removeAuthor, removeYear, removePublisher);
 
             library.RemoveBook(bookToRemove);
-            cout << "The book has been removed from the library.\n";
+            cout << "The book has been removed from the library." << endl;
         }
         else if (choice == 3) {
             string criteria, value;
-            cout << "Enter search criteria (title/author/publisher/year): ";
+            cout << "Enter the search criteria (title/author/publisher/year): ";
             cin >> criteria;
             cout << "Enter the criteria value: ";
             cin >> value;
@@ -66,7 +66,7 @@ int main() {
             break;
         }
         else {
-            cout << "Wrong choice!." << endl;
+            cout << "Invalid choice!" << endl;
             exit(1);
         }
     }

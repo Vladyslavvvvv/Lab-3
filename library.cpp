@@ -12,7 +12,7 @@ void Library::AddBook(const Book& book) {
         bookCount++;
     }
     else {
-        cout << "The library is full. Unable to add book." << endl;
+        cout << "Library is full. Unable to add the book." << endl;
         exit(1);
     }
 }
@@ -46,8 +46,8 @@ void Library::SearchByCriteria(const string& criteria, const string& value) cons
             (criteria == "author" && books[i].getAuthor() == value) ||
             (criteria == "publisher" && books[i].getPublisher() == value) ||
             (criteria == "year" && to_string(books[i].getYear()) == value)) {
-            cout << "Books with a criterion '" << criteria << "':\n";
-            cout << books[i].getTitle() << " wrote " << books[i].getAuthor() << " (" << books[i].getYear() << ")\n";
+            cout << "Books with the '" << criteria << "' criteria:\n";
+            cout << books[i].getTitle() << " written by " << books[i].getAuthor() << " (" << books[i].getYear() << ")\n";
             found = true;
         }
     }
@@ -60,21 +60,38 @@ void Library::SearchByCriteria(const string& criteria, const string& value) cons
 
 Library Library::operator+(const Book& book) {
     Library result = *this;
-    try {
-        result.AddBook(book);
+    if (bookCount < maxBooks) {
+        result.books[result.bookCount] = book;
+        result.bookCount++;
     }
-    catch (...) {
-        cout << "Error adding book." << endl;
+    else {
+        cout << "Library is full. Unable to add the book." << endl;
+        exit(1);
     }
     return result;
 }
 
 Library Library::operator-(const Book& book) {
     Library result = *this;
-    try {
-        result.RemoveBook(book);
+    bool bookFound = false;
+    for (int i = 0; i < result.bookCount; i++) {
+        if (result.books[i].getTitle() == book.getTitle() &&
+            result.books[i].getAuthor() == book.getAuthor() &&
+            result.books[i].getYear() == book.getYear() &&
+            result.books[i].getPublisher() == book.getPublisher()) {
+            for (int j = i; j < result.bookCount - 1; j++) {
+                result.books[j] = result.books[j + 1];
+            }
+            result.bookCount--;
+            bookFound = true;
+            break;
+        }
     }
-    catch (...) {
-        cout << "Error deleting the book." << endl;
+
+    if (!bookFound) {
+        cout << "The book was not found in the library." << endl;
+        exit(1);
     }
+
     return result;
+}
