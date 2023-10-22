@@ -12,7 +12,7 @@ void Library::AddBook(const Book& book) {
         bookCount++;
     }
     else {
-        cout << "Бібліотека заповнена. Неможливо додати книгу." << endl;
+        cout << "." << endl;
         exit(1);
     }
 }
@@ -34,7 +34,7 @@ void Library::RemoveBook(const Book& book) {
     }
 
     if (!bookFound) {
-        cout << "Книга не знайдена в бібліотеці." << endl;
+        cout << "." << endl;
         exit(1);
     }
 }
@@ -42,18 +42,18 @@ void Library::RemoveBook(const Book& book) {
 void Library::SearchByCriteria(const string& criteria, const string& value) const {
     bool found = false;
     for (int i = 0; i < bookCount; i++) {
-        if ((criteria == "назва" && books[i].getTitle() == value) ||
-            (criteria == "автор" && books[i].getAuthor() == value) ||
-            (criteria == "видавництво" && books[i].getPublisher() == value) ||
-            (criteria == "рік" && to_string(books[i].getYear()) == value)) {
-            cout << "Книги з критерієм '" << criteria << "':\n";
-            cout << books[i].getTitle() << " написав " << books[i].getAuthor() << " (" << books[i].getYear() << ")\n";
+        if ((criteria == "" && books[i].getTitle() == value) ||
+            (criteria == "" && books[i].getAuthor() == value) ||
+            (criteria == "" && books[i].getPublisher() == value) ||
+            (criteria == "" && to_string(books[i].getYear()) == value)) {
+            cout << " '" << criteria << "':\n";
+            cout << books[i].getTitle() << "  " << books[i].getAuthor() << " (" << books[i].getYear() << ")\n";
             found = true;
         }
     }
 
     if (!found) {
-        cout << "Жодна книга в бібліотеці не відповідає критерію." << endl;
+        cout << "." << endl;
         exit(1);
     }
 }
@@ -64,7 +64,7 @@ Library Library::operator+(const Book& book) {
         result.AddBook(book);
     }
     catch (...) {
-        cout << "Помилка при додаванні книги." << endl;
+        cout << "Помилка додавання книги." << endl;
     }
     return result;
 }
@@ -75,7 +75,7 @@ Library Library::operator-(const Book& book) {
         result.RemoveBook(book);
     }
     catch (...) {
-        cout << "Помилка при видаленні книги." << endl;
+        cout << "Помилка видалення книги." << endl;
     }
     return result;
 }
