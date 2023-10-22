@@ -30,9 +30,13 @@ int main() {
             cout << "Enter the publisher: ";
             cin >> publisher;
 
-            Book book(title, author, year, publisher);
+            Book bookToAdd;
+            bookToAdd.setTitle(title);
+            bookToAdd.setAuthor(author);
+            bookToAdd.setYear(year);
+            bookToAdd.setPublisher(publisher);
 
-            library = library + book;
+            library = library + bookToAdd;
             cout << "\nThe book has been added to the library.\n" << endl;
         }
         else if (choice == 2) {
@@ -47,10 +51,14 @@ int main() {
             cout << "Enter the publisher of the book to delete: ";
             cin >> removePublisher;
 
-            Book bookToRemove(removeTitle, removeAuthor, removeYear, removePublisher);
+            Book bookToRemove;
+            bookToRemove.setTitle(removeTitle);
+            bookToRemove.setAuthor(removeAuthor);
+            bookToRemove.setYear(removeYear);
+            bookToRemove.setPublisher(removePublisher);
 
             library = library - bookToRemove;
-            cout << "\nThe book has been removed from the library.\n";
+            cout << "The book has been removed from the library.\n";
         }
         else if (choice == 3) {
             int choiceC;
@@ -61,26 +69,21 @@ int main() {
             cout << "4 - Publishing house" << endl;
             cout << "Enter your choice: ";
             cin >> choiceC;
-            if (choiceC == 1 || choiceC == 2 || choiceC == 4)
-            {
+            if (choiceC == 1 || choiceC == 2 || choiceC == 4) {
                 string Str;
-                if (choiceC == 1)
-                {
+                if (choiceC == 1) {
                     cout << "\nTitle: ";
                 }
-                else if (choiceC == 2)
-                {
+                else if (choiceC == 2) {
                     cout << "\nAuthor: ";
                 }
-                else if (choiceC == 4)
-                {
+                else if (choiceC == 4) {
                     cout << "\nPublisher: ";
                 }
                 cin >> Str;
                 library.SearchByCriteria(Str, choiceC);
             }
-            else if (choiceC == 3)
-            {
+            else if (choiceC == 3) {
                 int Year;
                 cout << "\nYear: ";
                 cin >> Year;

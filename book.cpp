@@ -22,3 +22,19 @@ int Book::getYear() const {
 const string& Book::getPublisher() const {
     return publisher;
 }
+
+void Book::setTitle(const string& newTitle) {
+    title = newTitle;
+}
+
+void Book::setAuthor(const string& newAuthor) {
+    author = newAuthor;
+}
+
+void Book::setYear(int newYear) {
+    year = newYear;
+}
+
+void Book::setPublisher(const string& newPublisher) {
+    publisher = newPublisher;
+}
