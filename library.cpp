@@ -81,7 +81,7 @@ Library Library::operator+(const Book& book) {
     else {
         cout << "Error: Library is full, cannot add the book." << endl;
     }
-    return *this; // Повертаємо посилання на поточний об'єкт бібліотеки
+    return *this;
 }
 
 Library Library::operator-(const Book& book) {
@@ -94,9 +94,9 @@ Library Library::operator-(const Book& book) {
                 books[j] = books[j + 1];
             }
             bookCount--;
-            return *this; // Повертаємо посилання на поточний об'єкт бібліотеки
+            return *this;
         }
     }
     cout << "Error: Book not found in the library." << endl;
-    return *this; // Повертаємо посилання на поточний об'єкт бібліотеки
+    return *this;
 }

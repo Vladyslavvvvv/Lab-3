@@ -1,4 +1,6 @@
 #include "book.h"
+#include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -16,7 +18,16 @@ const string& Book::getAuthor() const {
 }
 
 int Book::getYear() const {
-    return year;
+    try {
+        if (year < 0) {
+            throw invalid_argument("Year is invalid.");
+        }
+        return year;
+    }
+    catch (const exception& e) {
+        cout << "Exception caught: " << e.what() << endl;
+        return 1;
+    }
 }
 
 const string& Book::getPublisher() const {
@@ -32,7 +43,15 @@ void Book::setAuthor(const string& newAuthor) {
 }
 
 void Book::setYear(int newYear) {
-    year = newYear;
+    try {
+        if (newYear < 0) {
+            throw invalid_argument("Year cannot be negative.");
+        }
+        year = newYear;
+    }
+    catch (const exception& e) {
+        cout << "Exception caught: " << e.what() << endl;
+    }
 }
 
 void Book::setPublisher(const string& newPublisher) {
