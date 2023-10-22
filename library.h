@@ -7,7 +7,8 @@ public:
     Library();
     void AddBook(const Book& book);
     void RemoveBook(const Book& book);
-    void SearchByCriteria(const string& criteria, const string& value) const;
+    void SearchByCriteria(const string& Str, int Choice);
+    void SearchByCriteria(const int Year);
     Library operator+(const Book& book);
     Library operator-(const Book& book);
 

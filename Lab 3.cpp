@@ -5,16 +5,15 @@
 using namespace std;
 
 int main() {
-    setlocale(LC_ALL, "Ukrainian");
     Library library;
 
     while (true) {
-        cout << "Меню:\n";
-        cout << "1. Додати книгу\n";
-        cout << "2. Видалити книгу\n";
-        cout << "3. Пошук книги\n";
-        cout << "4. Вихід\n";
-        cout << "Введіть вибір: ";
+        cout << "Menu:\n";
+        cout << "1. Add a book\n";
+        cout << "2. Delete the book\n";
+        cout << "3. Book search\n";
+        cout << "4. Exit\n";
+        cout << "\nEnter your choice: ";
         int choice;
         cin >> choice;
 
@@ -22,53 +21,77 @@ int main() {
             string title, author, publisher;
             int year;
 
-            // Введення даних про книгу
-            cout << "Введіть назву книги: ";
+            cout << "\nEnter the title of the book: ";
             cin >> title;
-            cout << "Введіть автора: ";
+            cout << "Enter the author: ";
             cin >> author;
-            cout << "Введіть рік публікації: ";
+            cout << "Enter the year of publication: ";
             cin >> year;
-            cout << "Введіть видавництво: ";
+            cout << "Enter the publisher: ";
             cin >> publisher;
 
             Book book(title, author, year, publisher);
 
-            // Додавання книги до бібліотеки
             library.AddBook(book);
-            cout << "Книга додана до бібліотеки.\n";
+            cout << "\nThe book has been added to the library.\n" << endl;
         }
         else if (choice == 2) {
             string removeTitle, removeAuthor, removePublisher;
             int removeYear;
-            cout << "Введіть назву книги для видалення: ";
+            cout << "Enter the name of the book to delete: ";
             cin >> removeTitle;
-            cout << "Введіть автора книги для видалення: ";
+            cout << "Enter the author of the book to delete: ";
             cin >> removeAuthor;
-            cout << "Введіть рік видання книги для видалення: ";
+            cout << "Enter the publication year of the book to delete: ";
             cin >> removeYear;
-            cout << "Введіть видавництво книги для видалення: ";
+            cout << "Enter the publisher of the book to delete: ";
             cin >> removePublisher;
 
             Book bookToRemove(removeTitle, removeAuthor, removeYear, removePublisher);
 
             library.RemoveBook(bookToRemove);
-            cout << "Книга видалена з бібліотеки.\n";
+            cout << "\nThe book has been removed from the library.\n";
         }
         else if (choice == 3) {
-            string criteria, value;
-            cout << "Введіть критерій пошуку (назва/автор/видавництво/рік): ";
-            cin >> criteria;
-            cout << "Введіть значення критерію: ";
-            cin >> value;
-
-            library.SearchByCriteria(criteria, value);
+            int choiceC;
+            cout << "\nBy what criteria to search for a book?" << endl;
+            cout << "1 - The title of the book" << endl;
+            cout << "2 - The author of the book" << endl;
+            cout << "3 - Year of publication" << endl;
+            cout << "4 - Publishing house" << endl;
+            cout << "Enter your choice: ";
+            cin >> choiceC;
+            if (choiceC == 1 || choiceC == 2 || choiceC == 4)
+            {
+                string Str;
+                if (choiceC == 1)
+                {
+                    cout << "\nTitle: ";
+                }
+                else if (choiceC == 2)
+                {
+                    cout << "\nAuthor: ";
+                }
+                else if (choiceC == 4)
+                {
+                    cout << "\nPublisher: ";
+                }
+                cin >> Str;
+                library.SearchByCriteria(Str, choiceC);
+            }
+            else if (choiceC == 3)
+            {
+                int Year;
+                cout << "\nYear: ";
+                cin >> Year;
+                library.SearchByCriteria(Year);
+            }
         }
         else if (choice == 4) {
-            break; // Вихід із програми
+            break;
         }
         else {
-            cout << "Неправильний вибір!." << endl;
+            cout << "Wrong choice!" << endl;
             exit(1);
         }
     }
