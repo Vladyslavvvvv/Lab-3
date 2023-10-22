@@ -32,7 +32,7 @@ int main() {
 
             Book book(title, author, year, publisher);
 
-            library.AddBook(book);
+            library = library + book;
             cout << "\nThe book has been added to the library.\n" << endl;
         }
         else if (choice == 2) {
@@ -49,7 +49,7 @@ int main() {
 
             Book bookToRemove(removeTitle, removeAuthor, removeYear, removePublisher);
 
-            library.RemoveBook(bookToRemove);
+            library = library - bookToRemove;
             cout << "\nThe book has been removed from the library.\n";
         }
         else if (choice == 3) {
